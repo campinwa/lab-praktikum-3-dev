@@ -247,6 +247,7 @@ router.put("/change_password", jwtAuth, async (req, res) => {
   } catch {
     data = { role: "user" };
   }
+  
   if (!data.secret_question || !data.secret_answer) {
     return res.status(400).json({
       success: false,
@@ -283,6 +284,14 @@ router.get("/logout", jwtAuth, (req, res) => {
   res.clearCookie("auth_token");
   res.status(302).redirect("/");
 });
+
+router.get('/customer-support', (req, res) => {
+  
+})
+
+router.post('/customer-support', (req, res) => {
+
+})
 
 module.exports = (database) => {
   db = database;

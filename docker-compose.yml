@@ -1,25 +1,27 @@
 version: '3.8'
 services:
-  app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    restart: always
-    ports:
-      - "3000:3000"
-    depends_on:
-      - db
-    environment:
-      - FLAG=uoftctf{fake_flag}
-      - DB_HOST=db
-      - MYSQL_USER=web
-      - MYSQL_PASSWORD=PRIVATE
-      - MYSQL_DATABASE=ctf_challenge
+  # app:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   restart: always
+  #   ports:
+  #     - "3000:3000"
+  #   depends_on:
+  #     - db
+  #   environment:
+  #     - FLAG=uoftctf{fake_flag}
+  #     - DB_HOST=db
+  #     - MYSQL_USER=web
+  #     - MYSQL_PASSWORD=PRIVATE
+  #     - MYSQL_DATABASE=ctf_challenge
   db:
     image: mysql:5.7
     volumes:
       - ./config/init.sql:/docker-entrypoint-initdb.d/init.sql
     restart: always
+    ports:
+      - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: PRIVATE
       MYSQL_DATABASE: ctf_challenge
